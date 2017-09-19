@@ -7,7 +7,7 @@ echo "max_connections = $MAX_CONNECTIONS" >> "$PGDATA/postgresql.conf"
 
 # We set master replication-related parameters for both slave and master,
 # so that the slave might work as a primary after failover.
-echo "wal_level = hot_standby" >> "$PGDATA/postgresql.conf"
+echo "wal_level = replica" >> "$PGDATA/postgresql.conf"
 echo "wal_keep_segments = $WAL_KEEP_SEGMENTS" >> "$PGDATA/postgresql.conf"
 echo "max_wal_senders = $MAX_WAL_SENDERS" >> "$PGDATA/postgresql.conf"
 # slave settings, ignored on master
