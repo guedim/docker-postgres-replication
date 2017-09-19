@@ -1,4 +1,6 @@
 postgres-slave:
+  build:
+    context: .
   image: "nebirhos/postgres-replication"
   ports:
     - 5433:5432
@@ -9,6 +11,7 @@ postgres-slave:
     POSTGRES_MASTER_SERVICE_HOST: postgres-master
 
 postgres-master:
-  image: "nebirhos/postgres-replication"
+  build:
+    context: .
   ports:
     - 5432:5432
