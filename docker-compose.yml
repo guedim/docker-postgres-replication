@@ -1,17 +1,21 @@
-postgres-slave:
-  build:
-    context: .
-  image: "nebirhos/postgres-replication"
-  ports:
-    - 5433:5432
-  links:
-    - postgres-master
-  environment:
-    REPLICATION_ROLE: slave
-    POSTGRES_MASTER_SERVICE_HOST: postgres-master
+#https://github.com/docker-library/postgres/issues/193
+version: '2'
 
-postgres-master:
-  build:
-    context: .
-  ports:
-    - 5432:5432
+services:
+  postgres-master:
+    build:
+      context: .
+    ports:
+      - 5432:5432
+    volumes:
+      - ./scripts:/docker-entrypoint-initdb.d
+#  postgres-slave:
+#    build:
+#      context: .
+#    ports:
+#      - 5433:5432
+#    links:
+#      - postgres-master
+#    environment:
+#      REPLICATION_ROLE: slave
+#      POSTGRES_MASTER_SERVICE_HOST: postgres-master
